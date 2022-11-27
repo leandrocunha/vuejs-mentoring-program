@@ -10,6 +10,8 @@ export default {
   name: "my-button",
 
   methods: {
+    $emit: defineEmits<{(e: string): void }>(),
+
     onClick() {
       /**
        * Click event
