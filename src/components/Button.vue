@@ -7,7 +7,7 @@
 
 <script lang="ts">
 export default {
-  name: "my-button",
+  name: "ButtonDefault",
 
   methods: {
     onClick() {
