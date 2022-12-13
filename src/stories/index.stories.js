@@ -29,11 +29,18 @@ export const Button = () => ({
   },
 });
 
-export const SearchFilter = () => ({
-  render() {
-    return <SearchFilterCpt label="Search by" />;
+const SearchFilterTemplate = (args) => ({
+  components: { SearchFilterCpt },
+  setup() {
+    return { args };
   },
+  template: '<SearchFilterCpt v-bind="args" />',
 });
+
+export const SearchFilter = SearchFilterTemplate.bind({});
+SearchFilter.args = {
+  label: "Search by",
+};
 
 export const ResultCount = () => ({
   render() {
