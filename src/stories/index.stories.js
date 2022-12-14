@@ -42,8 +42,15 @@ SearchFilter.args = {
   label: "Search by",
 };
 
-export const ResultCount = () => ({
-  render() {
-    return <ResultCountCpt count="{{7}}" />;
+const ResultCountTemplate = (args) => ({
+  components: { ResultCountCpt },
+  setup() {
+    return { args };
   },
+  template: `<ResultCountCpt v-bind="args" />`,
 });
+
+export const ResultCount = ResultCountTemplate.bind({});
+ResultCount.args = {
+  count: 7,
+};
