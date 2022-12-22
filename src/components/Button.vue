@@ -6,9 +6,10 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: "my-button",
+import { defineComponent } from 'vue';
 
+export default defineComponent({
+  name: "ButtonDefault",
   methods: {
     onClick() {
       /**
@@ -19,7 +20,7 @@ export default {
       this.$emit("click");
     },
   },
-};
+});
 </script>
 
 <style scoped>
