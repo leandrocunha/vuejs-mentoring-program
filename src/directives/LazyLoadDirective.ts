@@ -1,4 +1,10 @@
-export default {
+import { ObjectDirective } from "vue";
+interface ILazyLoadDirective<T = unknown, V = (el: HTMLElement) => void>
+  extends ObjectDirective<T, V> {
+  inserted: V;
+}
+
+const LazyLoadDirective: ILazyLoadDirective = {
   inserted: (el: HTMLElement) => {
     function loadImage() {
       const imageElement = Array.from(el.children).find(
@@ -13,7 +19,10 @@ export default {
       }
     }
 
-    function handleIntersect(entries, observer) {
+    function handleIntersect(
+      entries: IntersectionObserverEntry[],
+      observer: IntersectionObserver
+    ) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           loadImage();
@@ -40,3 +49,5 @@ export default {
     }
   },
 };
+
+export default LazyLoadDirective;

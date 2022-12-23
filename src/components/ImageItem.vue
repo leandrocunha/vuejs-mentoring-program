@@ -1,6 +1,6 @@
 <template>
-  <figure v-lazyload class="image_wrapper">
-    <img class="image_item" :data-url="source" alt="Movie Poster" src="" />
+  <figure>
+    <img v-lazyload class="image_item" :data-url="source" alt="Movie Poster" />
   </figure>
 </template>
 
