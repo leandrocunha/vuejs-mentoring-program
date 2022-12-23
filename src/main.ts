@@ -1,4 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import LazyLoadDirective from "./directives/LazyLoadDirective.js";
 
-createApp(App).mount("#app");
+const app = createApp(App);
+
+app.directive("lazyload", LazyLoadDirective);
+app.mount("#app");
