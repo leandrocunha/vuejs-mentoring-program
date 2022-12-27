@@ -1,15 +1,10 @@
-import { ObjectDirective } from "vue";
-interface ILazyLoadDirective<T = unknown, V = (el: HTMLElement) => void>
-  extends ObjectDirective<T, V> {
-  inserted: V;
-}
-
-const LazyLoadDirective: ILazyLoadDirective = {
-  inserted: (el: HTMLElement) => {
+const LazyLoadDirective = {
+  mounted: (el: HTMLElement) => {
     function loadImage() {
       const imageElement = Array.from(el.children).find(
         (el) => el.nodeName === "IMG"
       ) as HTMLImageElement;
+
       if (imageElement) {
         imageElement.addEventListener("load", () => {
           setTimeout(() => el.classList.add("loaded"), 100);
@@ -39,9 +34,11 @@ const LazyLoadDirective: ILazyLoadDirective = {
         root: null;
         threshold: number;
       };
+
       const observer = new IntersectionObserver(handleIntersect, options);
       observer.observe(el);
     }
+
     if (window["IntersectionObserver"]) {
       createObserver();
     } else {
