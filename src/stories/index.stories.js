@@ -6,6 +6,7 @@ import TextCpt from "../components/Text.vue";
 import ButtonDefault from "../components/Button.vue";
 import SearchFilterCpt from "../components/SearchFilter.vue";
 import ResultCountCpt from "../components/ResultCount.vue";
+import MovieDurationCpt from "../components/MovieDuration";
 
 export default {
   title: "Atomic",
@@ -53,4 +54,17 @@ const ResultCountTemplate = (args) => ({
 export const ResultCount = ResultCountTemplate.bind({});
 ResultCount.args = {
   count: 7,
+};
+
+const DurationTemplate = (args) => ({
+  components: { MovieDurationCpt },
+  setup() {
+    return { args };
+  },
+  template: `<MovieDurationCpt v-bind="args" />`,
+});
+
+export const MovieDuration = DurationTemplate.bind({});
+MovieDuration.args = {
+  length: 154,
 };
