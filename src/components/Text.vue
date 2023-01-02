@@ -6,7 +6,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Text",
+  name: "TextItem",
   props: {
     text: String,
   },
