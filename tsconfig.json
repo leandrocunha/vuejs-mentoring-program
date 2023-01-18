@@ -23,7 +23,10 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "src/directives/LazyLoadDirective.js",
+    "src/directives/LazyLoadDirective.js"
   ],
   "exclude": ["node_modules"]
 }
+
