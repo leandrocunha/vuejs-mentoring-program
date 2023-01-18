@@ -17,15 +17,25 @@ interface IMovie {
 }
 
 export const useMovieStore = defineStore("movieStore", {
-  state: () => ({ movies: moviesData as IMovie[] }),
-  getters: {
-    movieById: (state) => {
+  state: (): { movies: IMovie[]; moviesList: IMovie[] } => ({
+    movies: moviesData,
+    moviesList: moviesData,
+  }),
+  actions: {
+    movieById(state: { movies: IMovie[] }) {
       return (movieId: number) =>
         state.movies.filter((item: IMovie) => item.id === movieId)[0];
     },
-    moviesByTitle: (state) => {
-      return (movieTitle: string) =>
-        state.movies.filter((item: IMovie) => item.title === movieTitle);
+    moviesByTitle(movieTitle: string) {
+      const normalizedStr = movieTitle.toLowerCase();
+
+      const result = this.movies.filter((item: IMovie) =>
+        item.title.toLowerCase().includes(normalizedStr)
+      );
+
+      if (result.length) {
+        this.$patch({ moviesList: result });
+      }
     },
   },
 });

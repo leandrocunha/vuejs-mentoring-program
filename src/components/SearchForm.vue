@@ -1,34 +1,30 @@
 <template>
   <div>
     <!-- <Input /> -->
-    <input
-      type="text"
-      ref="movieTitle"
-      v-model="inputValue"
-      @keydown="searchMovies"
-    />
-    <p>movies count: {{ movies.length }}</p>
+    <input type="text" v-model="inputValue" />
   </div>
 </template>
 
 <script lang="ts">
+import { computed, defineComponent } from "vue";
 import { useMovieStore } from "@/stores/MovieStore";
-import { defineComponent, ref } from "vue";
-import InputCpt from "./Input.vue";
 
 export default defineComponent({
   setup() {
     const store = useMovieStore();
-    const movieTitle = ref();
-    const searchMovies = () => {
-      const { el } = movieTitle.value;
-      console.log(el.value);
-      store.moviesByTitle(el.value);
+    const moviesList = computed(() => store.moviesList);
+    return { ...store, moviesList };
+  },
+  data() {
+    return {
+      inputValue: "",
     };
-
-    return { ...store };
+  },
+  watch: {
+    inputValue(str) {
+      this.moviesByTitle(str);
+    },
   },
   name: "SearchForm",
-  components: { InputCpt },
 });
 </script>
