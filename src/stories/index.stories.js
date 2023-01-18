@@ -7,6 +7,7 @@ import ButtonDefault from "../components/Button.vue";
 import SearchFilterCpt from "../components/SearchFilter.vue";
 import ResultCountCpt from "../components/ResultCount.vue";
 import MovieDurationCpt from "../components/MovieDuration";
+import SearchFormCpt from "../components/SearchForm.vue";
 
 export default {
   title: "Atomic",
@@ -68,3 +69,12 @@ export const MovieDuration = DurationTemplate.bind({});
 MovieDuration.args = {
   length: 154,
 };
+
+const SearchFormTemplate = (args) => ({
+  components: { SearchFormCpt },
+  search() {
+    return { args };
+  },
+  template: `<SearchFormCpt />`,
+});
+export const SearchForm = SearchFormTemplate.bind({});

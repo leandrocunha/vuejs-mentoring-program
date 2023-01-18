@@ -19,9 +19,13 @@ interface IMovie {
 export const useMovieStore = defineStore("movieStore", {
   state: () => ({ movies: moviesData as IMovie[] }),
   getters: {
-    movieById(state) {
+    movieById: (state) => {
       return (movieId: number) =>
         state.movies.filter((item: IMovie) => item.id === movieId)[0];
+    },
+    moviesByTitle: (state) => {
+      return (movieTitle: string) =>
+        state.movies.filter((item: IMovie) => item.title === movieTitle);
     },
   },
 });
