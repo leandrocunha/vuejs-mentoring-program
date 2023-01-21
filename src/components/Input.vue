@@ -1,5 +1,5 @@
 <template>
-<input type="text" placeholder="find your move" />
+  <input type="text" placeholder="Find your movie" />
 </template>
 
 <script lang="ts">
