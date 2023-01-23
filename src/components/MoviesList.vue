@@ -3,28 +3,34 @@
     Movies List (scroll down to see the lazy load images at Network tab of
     devtools)
   </p>
-  <SearchForm />
-  <span v-for="movie in moviesList" v-bind:key="movie.id">
-    <div class="movie">
-      <ImageItem :source="movie.poster_path" />
-      <MovieDetails v-bind="movieById(movie.id)" />
-    </div>
-  </span>
+  <p v-if="!moviesList">Loading...</p>
+  <div v-if="moviesList">
+    <SearchForm />
+    <span v-for="movie in moviesList" v-bind:key="movie.id">
+      <div class="movie">
+        <ImageItem :source="movie.poster_path" />
+        <MovieDetails v-bind="movieById(movie.id)" />
+      </div>
+    </span>
+  </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { defineComponent } from "vue";
 import { useMovieStore } from "@/stores/MovieStore";
 import ImageItem from "./ImageItem.vue";
 import MovieDetails from "./MovieDetails.vue";
 import SearchForm from "./SearchForm.vue";
+import { api } from "@/api";
 
 export default defineComponent({
-  setup() {
+  async setup() {
     const store = useMovieStore();
-    const moviesList = computed(() => store.moviesList);
+    const movies = await api.fetchAllMovies();
 
-    return { ...store, moviesList };
+    store.setMovies(movies);
+
+    return { ...store };
   },
   name: "MoviesList",
   components: { ImageItem, MovieDetails, SearchForm },

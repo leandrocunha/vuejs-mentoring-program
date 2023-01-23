@@ -19,7 +19,7 @@ interface IMovie {
 export const useMovieStore = defineStore("movieStore", {
   state: (): { movies: IMovie[]; moviesList: IMovie[] } => ({
     movies: moviesData,
-    moviesList: moviesData,
+    moviesList: [],
   }),
   actions: {
     movieById(state: { movies: IMovie[] }) {
@@ -36,6 +36,9 @@ export const useMovieStore = defineStore("movieStore", {
       if (result.length) {
         this.$patch({ moviesList: result });
       }
+    },
+    setMovies(moviesList: IMovie[]) {
+      this.$patch({ moviesList: [...moviesList] });
     },
   },
 });
