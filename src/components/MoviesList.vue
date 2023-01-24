@@ -1,18 +1,24 @@
 <template>
-  <p class="tall-section-title">
-    Movies List (scroll down to see the lazy load images at Network tab of
-    devtools)
-  </p>
-  <p v-if="!moviesList">Loading...</p>
-  <div v-if="moviesList">
-    <SearchForm />
-    <span v-for="movie in moviesList" v-bind:key="movie.id">
-      <div class="movie">
-        <ImageItem :source="movie.poster_path" />
-        <MovieDetails v-bind="movieById(movie.id)" />
+  <Suspense>
+    <template #default>
+      <p class="tall-section-title">
+        Movies List (scroll down to see the lazy load images at Network tab of
+        devtools)
+      </p>
+      <div>
+        <SearchForm />
+        <span v-for="movie in moviesList" v-bind:key="movie.id">
+          <div class="movie">
+            <ImageItem :source="movie.poster_path" />
+            <MovieDetails v-bind="movieById(movie.id)" />
+          </div>
+        </span>
       </div>
-    </span>
-  </div>
+    </template>
+    <template #fallback>
+      <p>Loading...</p>
+    </template>
+  </Suspense>
 </template>
 
 <script lang="ts">
@@ -28,7 +34,10 @@ export default defineComponent({
     const store = useMovieStore();
     const movies = await api.fetchAllMovies();
 
-    store.setMovies(movies);
+    store.$patch({
+      moviesList: [...movies],
+    });
+    // store.setMovies(movies);
 
     return { ...store };
   },
