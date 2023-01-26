@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { api } from "@/api";
 import moviesData from "../../data/movies.json";
 
 interface IMovie {
@@ -37,8 +38,11 @@ export const useMovieStore = defineStore("movieStore", {
         this.$patch({ moviesList: result });
       }
     },
-    setMovies(moviesList: IMovie[]) {
-      this.$patch({ moviesList: [...moviesList] });
+    async loadMovies() {
+      const movies = await api.fetchAllMovies();
+      this.$patch({
+        moviesList: [...movies],
+      });
     },
   },
 });

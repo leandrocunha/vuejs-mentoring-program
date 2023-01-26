@@ -1,24 +1,18 @@
 <template>
-  <Suspense>
-    <template #default>
-      <p class="tall-section-title">
-        Movies List (scroll down to see the lazy load images at Network tab of
-        devtools)
-      </p>
-      <div>
-        <SearchForm />
-        <span v-for="movie in moviesList" v-bind:key="movie.id">
-          <div class="movie">
-            <ImageItem :source="movie.poster_path" />
-            <MovieDetails v-bind="movieById(movie.id)" />
-          </div>
-        </span>
+  <p class="tall-section-title">
+    Movies List (scroll down to see the lazy load images at Network tab of
+    devtools)
+  </p>
+  <p v-if="!moviesList.length">Loading...</p>
+  <div>
+    <SearchForm />
+    <span v-for="movie in moviesList" v-bind:key="movie.id">
+      <div class="movie">
+        <ImageItem :source="movie.poster_path" />
+        <MovieDetails v-bind="movieById(movie.id)" />
       </div>
-    </template>
-    <template #fallback>
-      <p>Loading...</p>
-    </template>
-  </Suspense>
+    </span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -27,17 +21,12 @@ import { useMovieStore } from "@/stores/MovieStore";
 import ImageItem from "./ImageItem.vue";
 import MovieDetails from "./MovieDetails.vue";
 import SearchForm from "./SearchForm.vue";
-import { api } from "@/api";
 
 export default defineComponent({
   async setup() {
     const store = useMovieStore();
-    const movies = await api.fetchAllMovies();
 
-    store.$patch({
-      moviesList: [...movies],
-    });
-    // store.setMovies(movies);
+    await store.loadMovies();
 
     return { ...store };
   },
