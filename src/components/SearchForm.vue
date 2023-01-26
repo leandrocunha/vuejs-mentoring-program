@@ -9,8 +9,8 @@ import { useMovieStore } from "@/stores/MovieStore";
 export default defineComponent({
   setup() {
     const store = useMovieStore();
-    const moviesList = computed(() => store.moviesList);
-    return { ...store, moviesList };
+    const movies = computed(() => store.moviesSearch);
+    return { ...store, moviesSearch: movies };
   },
   data() {
     return {

@@ -1,26 +1,27 @@
 import { defineStore } from "pinia";
 import { api } from "@/api";
-import moviesData from "../../data/movies.json";
 
 interface IMovie {
   id: number;
-  title: string;
-  tagline: string;
-  vote_average: number;
-  vote_count: number;
-  release_date: string;
-  poster_path: string;
-  overview: string;
-  budget: number;
-  revenue: number;
+  year: number;
   genres: string[];
-  runtime: null;
+  ratings: number[];
+  poster: string;
+  posterurl: string;
+  contentRating: string;
+  duration: string;
+  releaseDate: string;
+  averageRating: number;
+  storyline: string;
+  actors: string[];
+  imdbRating: number;
+  title: string;
 }
 
 export const useMovieStore = defineStore("movieStore", {
-  state: (): { movies: IMovie[]; moviesList: IMovie[] } => ({
-    movies: moviesData,
-    moviesList: [],
+  state: (): { movies: IMovie[]; moviesSearch: IMovie[] } => ({
+    movies: [],
+    moviesSearch: [],
   }),
   actions: {
     movieById(state: { movies: IMovie[] }) {
@@ -35,13 +36,13 @@ export const useMovieStore = defineStore("movieStore", {
       );
 
       if (result.length) {
-        this.$patch({ moviesList: result });
+        this.$patch({ moviesSearch: result });
       }
     },
     async loadMovies() {
       const movies = await api.fetchAllMovies();
       this.$patch({
-        moviesList: [...movies],
+        movies: [...movies],
       });
     },
   },
