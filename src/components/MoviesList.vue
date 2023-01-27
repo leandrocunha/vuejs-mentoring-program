@@ -3,13 +3,13 @@
     Movies List (scroll down to see the lazy load images at Network tab of
     devtools)
   </p>
-  <p v-if="!movies.length">Loading...</p>
+  <p v-if="!moviesList.length">Loading...</p>
   <div>
     <SearchForm />
-    <span v-for="movie in movies" v-bind:key="movie.id">
+    <span v-for="movie in moviesList" v-bind:key="movie.id">
       <div class="movie">
         <ImageItem :source="movie.posterurl" />
-        <MovieDetails v-bind="movieById(movie.id)" />
+        <MovieDetails :movie="movie" />
       </div>
     </span>
   </div>
@@ -25,7 +25,6 @@ import SearchForm from "./SearchForm.vue";
 export default defineComponent({
   setup() {
     const store = useMovieStore();
-
     store.loadMovies();
 
     return store;

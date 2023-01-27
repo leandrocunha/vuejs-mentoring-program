@@ -3,14 +3,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { defineComponent } from "vue";
 import { useMovieStore } from "@/stores/MovieStore";
 
 export default defineComponent({
   setup() {
     const store = useMovieStore();
-    const movies = computed(() => store.moviesSearch);
-    return { ...store, moviesSearch: movies };
+    return store;
   },
   data() {
     return {

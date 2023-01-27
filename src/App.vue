@@ -6,7 +6,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
 import MoviesList from "./components/MoviesList.vue";
 import PageHeader from "./components/PageHeader.vue";
 import { useMovieStore } from "./stores/MovieStore";
@@ -19,7 +18,6 @@ export default defineComponent({
   },
   name: "App",
   components: {
-    HelloWorld,
     MoviesList,
     PageHeader,
   },

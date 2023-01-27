@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { api } from "@/api";
 
-interface IMovie {
+export interface IMovie {
   id: number;
   year: number;
   genres: string[];
@@ -19,9 +19,9 @@ interface IMovie {
 }
 
 export const useMovieStore = defineStore("movieStore", {
-  state: (): { movies: IMovie[]; moviesSearch: IMovie[] } => ({
+  state: (): { movies: IMovie[]; moviesList: IMovie[] } => ({
     movies: [],
-    moviesSearch: [],
+    moviesList: [],
   }),
   actions: {
     movieById(state: { movies: IMovie[] }) {
@@ -36,13 +36,14 @@ export const useMovieStore = defineStore("movieStore", {
       );
 
       if (result.length) {
-        this.$patch({ moviesSearch: result });
+        this.$patch({ moviesList: [...result] });
       }
     },
     async loadMovies() {
       const movies = await api.fetchAllMovies();
       this.$patch({
         movies: [...movies],
+        moviesList: [...movies],
       });
     },
   },

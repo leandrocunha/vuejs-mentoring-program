@@ -1,14 +1,15 @@
 <template>
   <div class="movie-detail">
-    <TextItem :text="title" />
-    <TextItem :text="release_date" />
-    <MovieDuration :length="run_time" />
-    <TextItem :text="overview" />
+    <TextItem :text="movie.title" />
+    <TextItem :text="movie.releaseDate" />
+    <MovieDuration :length="movie.duration" />
+    <TextItem :text="movie.storyline" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { IMovie } from "@/stores/MovieStore";
 import TextItem from "./Text.vue";
 import MovieDuration from "./MovieDuration.vue";
 
@@ -16,10 +17,7 @@ export default defineComponent({
   name: "MovieDetails",
   components: { MovieDuration, TextItem },
   props: {
-    title: String,
-    overview: String,
-    release_date: String,
-    run_time: Number,
+    movie: Object as () => IMovie,
   },
 });
 </script>
