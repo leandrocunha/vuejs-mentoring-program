@@ -10,7 +10,6 @@
       <div class="movie">
         <router-link :to="{ name: 'movie', params: { movieSlug: movie.id } }">
           <ImageItem :source="movie.posterurl" />
-          <MovieDetails :movie="movie" />
         </router-link>
       </div>
     </span>
@@ -21,7 +20,6 @@
 import { defineComponent } from "vue";
 import { useMovieStore } from "@/stores/MovieStore";
 import ImageItem from "./ImageItem.vue";
-import MovieDetails from "./MovieDetails.vue";
 import SearchForm from "./SearchForm.vue";
 
 export default defineComponent({
@@ -32,7 +30,7 @@ export default defineComponent({
     return store;
   },
   name: "MoviesList",
-  components: { ImageItem, MovieDetails, SearchForm },
+  components: { ImageItem, SearchForm },
 });
 </script>
 

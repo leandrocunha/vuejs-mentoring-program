@@ -1,10 +1,11 @@
 <template>
-  <h1>Movie Details {{ movie.title }}</h1>
+  <MovieDetails />
 </template>
 
 <script lang="ts">
 import { useMovieStore } from "@/stores/MovieStore";
 import { defineComponent } from "vue";
+import MovieDetails from "@/components/MovieDetails.vue";
 
 export default defineComponent({
   setup() {
@@ -12,11 +13,6 @@ export default defineComponent({
     return { store };
   },
   name: "MovieDetailsView",
-  computed: {
-    movie() {
-      console.log(this.store.movies.filter(({ id }) => id === 1));
-      return this.store.movies.filter(({ id }) => id === 1);
-    },
-  },
+  components: { MovieDetails },
 });
 </script>
