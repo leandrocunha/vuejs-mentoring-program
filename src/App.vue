@@ -1,12 +1,10 @@
 <template>
   <PageHeader />
-  <MoviesList />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import MoviesList from "./components/MoviesList.vue";
 import PageHeader from "./components/PageHeader.vue";
 import { useMovieStore } from "./stores/MovieStore";
 
@@ -18,7 +16,6 @@ export default defineComponent({
   },
   name: "App",
   components: {
-    MoviesList,
     PageHeader,
   },
 });

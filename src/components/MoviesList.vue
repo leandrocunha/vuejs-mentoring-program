@@ -8,8 +8,10 @@
     <SearchForm />
     <span v-for="movie in moviesList" v-bind:key="movie.id">
       <div class="movie">
-        <ImageItem :source="movie.posterurl" />
-        <MovieDetails :movie="movie" />
+        <router-link :to="{ name: 'movie', params: { movieSlug: movie.id } }">
+          <ImageItem :source="movie.posterurl" />
+          <MovieDetails :movie="movie" />
+        </router-link>
       </div>
     </span>
   </div>
