@@ -9,7 +9,9 @@ describe("MovieDuration", () => {
   });
 
   it("should render correctly", () => {
-    const wrapper = shallowMount(MovieDuration, { props: { length: 100 } });
+    const wrapper = shallowMount(MovieDuration, {
+      props: { length: "PT100M" },
+    });
     expect(wrapper.html()).toContain(expectedResult);
   });
 });
