@@ -9,9 +9,11 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ImageItem",
+
   props: {
     source: {
       type: String,
+
       required: true,
     },
   },
@@ -22,20 +24,26 @@ export default defineComponent({
 .image {
   &__wrapper {
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     border-radius: 4px;
 
     &.loaded {
       .image {
         &__item {
           visibility: visible;
+
           opacity: 1;
+
           border: 0;
         }
 
         &__spinner {
           display: none;
+
           width: 100%;
         }
       }
@@ -44,9 +52,13 @@ export default defineComponent({
 
   &__item {
     width: 100%;
+
     border-radius: 4px;
+
     transition: all 0.4s ease-in-out;
+
     opacity: 0;
+
     visibility: hidden;
   }
 }
