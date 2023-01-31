@@ -19,7 +19,7 @@ export default defineComponent({
     title: String,
     overview: String,
     release_date: String,
-    run_time: Boolean,
+    run_time: Number,
   },
 });
 </script>

@@ -1,12 +1,11 @@
 <template>
   <button class="button is-primary" @click="onClick">
-    <!-- @slot default inner button content -->
     <slot></slot>
   </button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "ButtonDefault",
